@@ -7,7 +7,6 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-string wd;
 string file;
 
 bool endsWith(string const& fullString, string const& ending) {
