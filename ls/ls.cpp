@@ -19,24 +19,34 @@ bool endsWith(string const& fullString, string const& ending) {
     }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     string path = fs::current_path().string();
-    for (const auto& entry : fs::directory_iterator(path)) {
-        file = entry.path().string();
-        file.erase(file.begin(), file.begin() + path.size() + 1);
-        if (fs::is_directory(entry)) {
-            SetConsoleTextAttribute(hConsole, 9);
-            cout << file + "/" << endl;
-        }
-        else if (endsWith(file, ".exe")) {
-            SetConsoleTextAttribute(hConsole, 12);
-            cout << file << endl;
-        }
-        else {
-            SetConsoleTextAttribute(hConsole, 15);
-            cout << file << endl;
-        }
+    if (argc == 1) {
+        for (const auto& entry : fs::directory_iterator(path)) {
+            file = entry.path().string();
+            file.erase(file.begin(), file.begin() + path.size() + 1);
+            if (fs::is_directory(entry)) {
+                SetConsoleTextAttribute(hConsole, 9);
+                cout << file + "/" << endl;
+            }
+            else if (endsWith(file, ".exe")) {
+                SetConsoleTextAttribute(hConsole, 12);
+                cout << file << endl;
+            }
+            else {
+                SetConsoleTextAttribute(hConsole, 15);
+                cout << file << endl;
+            }
 
+        }
     }
+    else {
+        if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
+            cout << "Usage: ls [FILE]" << endl;
+            cout << "List files in a directory" << endl;
+            cout << "Source code: https://github.com/NotKronos/winls" << endl;
+        }
+    }
+    SetConsoleTextAttribute(hConsole, 15);
 }
