@@ -1,3 +1,7 @@
+/*
+*TODO: fix the same exact code appearing in two different places
+*TODO: make it loop through args, makes using multiple args at the same time possible
+*/
 #include <iostream>
 #include <filesystem>
 #include <direct.h>
